@@ -1,6 +1,6 @@
 # vibetrace
 
-`vibetrace` is a lightweight CLI for vibe coding sessions. It auto-commits your work in the background, lets you pin known-good checkpoints, and restores your project to any earlier state with full context for your AI assistant.
+`vibetrace` is a history tracker for your vibe coding sessions. It auto-commits your work in the background, lets you pin known-good checkpoints, and restores your project to any earlier state with full context for your AI assistant.
 
 ## Install
 
