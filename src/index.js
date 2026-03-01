@@ -78,6 +78,7 @@ export function runCli(argv) {
   program
     .command('commit')
     .description('Commit pending changes using the saved intent message')
+    .option('--tool <name>', 'Tag the commit with a tool source (e.g. codex, claude)')
     .action(commitCommand);
 
   program

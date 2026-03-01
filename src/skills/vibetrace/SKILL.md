@@ -9,10 +9,10 @@ This project uses `vibe` (vibetrace) for session history tracking.
 
 ### After completing any task
 
-Always run `vibe commit` after finishing changes to record the session with full context.
+Always run `vibe commit --tool codex` after finishing changes to record the session with full context.
 
 ```bash
-vibe commit
+vibe commit --tool codex
 ```
 
 ### Review session history
