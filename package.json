@@ -1,7 +1,13 @@
 {
   "name": "vibetrace",
   "version": "1.0.0",
-  "description": "Session-aware state management for AI-assisted coding",
+  "description": "A lightweight CLI for vibe coding sessions",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ccdejene/vibetrace.git"
+  },
+  "homepage": "https://github.com/ccdejene/vibetrace#readme",
   "type": "module",
   "files": [
     "bin",
