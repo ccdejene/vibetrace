@@ -8,8 +8,6 @@
 npm install -g vibetrace
 # or
 pnpm add -g vibetrace
-# or directly from GitHub
-npm install -g github:ccdejene/vibetrace
 ```
 
 The command is `vibe`.
@@ -119,8 +117,6 @@ To get the latest version:
 
 ```bash
 npm install -g vibetrace
-# or
-npm install -g github:ccdejene/vibetrace
 ```
 
 After updating, re-run `vibe install-hooks` in any existing project to pick up hook and skill changes.
