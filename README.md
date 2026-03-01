@@ -85,7 +85,6 @@ After restoring, your AI assistant automatically gets context about what state y
 **Starting a new project session**
 ```bash
 vibe init
-vibe watch --daemon
 # start prompting Claude or Codex — changes are auto-committed as you go
 ```
 
@@ -123,7 +122,7 @@ After updating, re-run `vibe install-hooks` in any existing project to pick up h
 
 ## AI Commit Summaries
 
-During `vibe init` you'll be asked if you want AI commit summaries. If enabled, when no intent is captured (common with Codex), `vibe` generates a commit message from the diff using whichever LLM you have configured:
+During `vibe init` you'll be asked if you want AI commit summaries. The user's own prompt is always used first — AI summarization only kicks in as a fallback when no prompt was captured (common with Codex). It generates a commit message from the diff using whichever LLM you have configured:
 
 ```bash
 export ANTHROPIC_API_KEY=sk-...   # uses Claude Haiku
