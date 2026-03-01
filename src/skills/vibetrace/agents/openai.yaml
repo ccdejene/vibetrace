@@ -1,0 +1,6 @@
+interface:
+  display_name: "vibetrace"
+  short_description: "Stay in control of your vibe coding sessions"
+
+policy:
+  allow_implicit_invocation: true

@@ -1,10 +1,9 @@
 import fs from 'fs/promises';
-import os from 'os';
 import path from 'path';
 import chalk from 'chalk';
 import { ensureGitRepo, stageAll, commit, hasUncommittedChanges, getUserIdentity } from '../lib/git.js';
 import { ensureVibeDir, writeDefaultConfig, writeDefaultPins, VIBE_DIR } from '../lib/config.js';
-import { installClaudeHook, installCodexShellHook } from './install-hooks.js';
+import { installClaudeHook, installCodexSkill } from './install-hooks.js';
 
 const VIBE_DENY_RULES = [
   'Edit(.vibe/**)',
@@ -43,7 +42,7 @@ export async function initCommand() {
     await ensureGitignore();
     await ensureVibeProtection();
     await installClaudeHook();
-    const codexResult = await installCodexShellHook();
+    const codexResult = await installCodexSkill();
 
     const identity = await getUserIdentity();
     if (!identity.name || !identity.email) {
@@ -67,8 +66,7 @@ export async function initCommand() {
     console.log(chalk.green('OK: vibe initialized.'));
     console.log('');
     if (!codexResult.alreadyInstalled) {
-      const rcFile = codexResult.rcFile.replace(os.homedir(), '~');
-      console.log(`  ${chalk.dim('Run this to activate Codex hook:')}  source ${rcFile}`);
+      console.log(`  ${chalk.dim('Codex skill installed at ~/.codex/skills/vibetrace')}`);
       console.log('');
     }
     console.log('Quick start:');
