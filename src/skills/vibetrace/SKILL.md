@@ -9,11 +9,14 @@ This project uses `vibe` (vibetrace) for session history tracking.
 
 ### After completing any task
 
-Always run `vibe commit --tool codex` after finishing changes to record the session with full context.
+Always run these two commands after finishing changes:
 
 ```bash
+vibe intent "brief description of what was changed"
 vibe commit --tool codex
 ```
+
+First save a short summary of what you did, then commit. This ensures the commit message reflects what Codex actually changed, not a stale message from a previous session.
 
 ### Review session history
 
