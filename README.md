@@ -122,16 +122,15 @@ After updating, re-run `vibe install-hooks` in any existing project to pick up h
 
 ## AI Commit Summaries
 
-During `vibe init` you'll be asked if you want AI commit summaries. The user's own prompt is always used first — AI summarization only kicks in as a fallback when no prompt was captured (common with Codex). It generates a commit message from the diff using whichever LLM you have configured:
+During `vibe init` you'll be asked if you want AI commit summaries. When enabled, `vibe` generates a commit message from the diff when no prompt was captured. Set whichever key you already have:
 
 ```bash
-export ANTHROPIC_API_KEY=sk-...   # uses Claude Haiku
-export OPENAI_API_KEY=sk-...      # uses GPT-4o mini
-export OLLAMA_MODEL=llama3.2      # uses local Ollama (no API key needed)
-export OLLAMA_HOST=http://localhost:11434  # optional, default shown
+export ANTHROPIC_API_KEY=sk-...   # Claude Haiku
+export OPENAI_API_KEY=sk-...      # GPT-4o mini
+export OLLAMA_MODEL=llama3.2      # local Ollama, no API key needed
 ```
 
-Priority: Anthropic → OpenAI → Ollama → falls back to a filename-based message. You can toggle this anytime in `.vibe/config.yaml` by setting `intent_summary: true` or `false`.
+You can toggle this anytime in `.vibe/config.yaml` by setting `intent_summary: true` or `false`.
 
 ## Notes
 
