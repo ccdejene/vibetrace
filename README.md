@@ -43,15 +43,30 @@ vibe pin "Working login flow"
 | `vibe show <ref>` | Show details for a commit or pin |
 | `vibe diff [ref1] [ref2]` | Show what changed between two points |
 | `vibe doctor` | Validate your environment and project setup |
-| `vibe install-hooks` | Install Claude and Codex prompt hooks |
-| `vibe uninstall-hooks` | Remove Claude and Codex prompt hooks |
+| `vibe install-hooks` | Install Claude hooks and Codex skill |
+| `vibe uninstall-hooks` | Remove Claude hooks and Codex skill |
 
 ## How It Works
 
-- `vibe init` installs hooks into Claude Code and Codex so your prompts are saved as commit intent before each session
-- When Claude or Codex finishes, `vibe` commits the changes tagged with the source (`[vibe:claude]`, `[vibe:codex]`)
+- `vibe init` sets up auto-committing, `.gitignore` rules, and AI tool integrations
 - Credentials are scrubbed from commit messages before writing to disk or git
 - `vibe restore` rolls back files, preserves history, writes `.vibe/restore-context.md`, and restarts your dev server automatically
+
+## AI Tool Integration
+
+### Claude Code (automatic)
+
+`vibe init` installs hooks into Claude Code that fire automatically:
+- When you submit a prompt → intent is saved
+- When Claude finishes → `vibe commit` runs and tags the commit as `[vibe:claude]`
+
+No manual steps needed.
+
+### Codex (skill-based)
+
+`vibe init` installs a Codex skill to `~/.codex/skills/vibetrace/`. The skill instructs Codex to run `vibe commit` after making changes and `vibe pin` before risky work.
+
+Unlike Claude Code hooks, Codex skills are instructional — Codex follows them as guidance rather than firing automatically. You can also prompt Codex directly: *"commit with vibe when done"*.
 
 ## Restore
 
