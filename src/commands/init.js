@@ -71,7 +71,7 @@ export async function initCommand() {
     console.log(chalk.green('OK: vibe initialized.'));
     console.log('');
     if (!codexResult.alreadyInstalled) {
-      console.log(`  ${chalk.dim('Codex skill installed at ~/.codex/skills/vibetrace')}`);
+      console.log(`  ${chalk.dim('Codex skill installed — restart Codex to activate it.')}`);
       console.log('');
     }
     console.log('Quick start:');
