@@ -113,6 +113,18 @@ vibe show abc1234        # full prompt and changes for a specific commit
 vibe restore ~1
 ```
 
+## Updating
+
+To get the latest version:
+
+```bash
+npm install -g vibetrace
+# or
+npm install -g github:ccdejene/vibetrace
+```
+
+After updating, re-run `vibe install-hooks` in any existing project to pick up hook and skill changes.
+
 ## Notes
 
 - `.vibe/` is local metadata — kept out of your repo via `.gitignore`
