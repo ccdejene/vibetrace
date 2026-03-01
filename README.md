@@ -121,6 +121,17 @@ npm install -g vibetrace
 
 After updating, re-run `vibe install-hooks` in any existing project to pick up hook and skill changes.
 
+## AI Commit Summaries
+
+If no intent is captured (common with Codex), `vibe` can generate a commit message from the diff by calling an LLM API. Set whichever key you already have:
+
+```bash
+export ANTHROPIC_API_KEY=sk-...   # uses Claude Haiku
+export OPENAI_API_KEY=sk-...      # uses GPT-4o mini
+```
+
+Priority: Anthropic → OpenAI → falls back to a basic filename-based message. No key needed — it's optional.
+
 ## Notes
 
 - `.vibe/` is local metadata — kept out of your repo via `.gitignore`
