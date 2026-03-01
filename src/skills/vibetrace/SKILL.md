@@ -15,14 +15,6 @@ Always run `vibe commit` after finishing changes to record the session with full
 vibe commit
 ```
 
-### Before making risky changes
-
-Run `vibe pin` to create a safe checkpoint you can return to.
-
-```bash
-vibe pin "Working auth, before refactor"
-```
-
 ### Review session history
 
 ```bash

@@ -64,7 +64,7 @@ No manual steps needed.
 
 ### Codex (skill-based)
 
-`vibe init` installs a Codex skill to `~/.codex/skills/vibetrace/`. The skill instructs Codex to run `vibe commit` after making changes and `vibe pin` before risky work.
+`vibe init` installs a Codex skill to `~/.codex/skills/vibetrace/`. The skill instructs Codex to run `vibe commit` after making changes.
 
 Unlike Claude Code hooks, Codex skills are instructional — Codex follows them as guidance rather than firing automatically. You can also prompt Codex directly: *"commit with vibe when done"*.
 
