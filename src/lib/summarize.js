@@ -7,13 +7,13 @@ const TIMEOUT_MS = 8000;
 const SYSTEM_PROMPT = 'You convert code changes into concise git commit subject lines. Output ONLY the commit message text — no prefix tags, no punctuation at end, no quotes, no explanation. Use imperative mood. Maximum 72 characters.';
 
 // Used by watch.js to summarize long intent prompts
-export async function summarizeIntent(prompt) {
+export async function summarizeIntent(prompt, tool) {
   if (!prompt) return null;
   const trimmed = prompt.trim();
   if (!trimmed) return null;
   if (trimmed.length <= MAX_SUBJECT) return trimmed;
 
-  const summary = await callApi(trimmed);
+  const summary = await callApi(trimmed, tool);
   return summary ?? truncate(trimmed);
 }
 
@@ -32,34 +32,34 @@ export async function summarizeDiff(tool) {
 
   if (!diff) return null;
 
-  const summary = await callApi(diff);
+  const summary = await callApi(diff, tool);
   if (!summary) return null;
 
   const tag = tool === 'claude' ? 'claude' : tool === 'codex' ? 'codex' : 'auto';
   return `[vibe:${tag}] ${summary}`;
 }
 
-async function callApi(content) {
+async function callApi(content, tool) {
   const anthropicKey = process.env.ANTHROPIC_API_KEY;
-  if (anthropicKey) {
-    try {
-      const result = await callAnthropic(content, anthropicKey);
-      if (result) return result;
-    } catch {}
-  }
-
   const openaiKey = process.env.OPENAI_API_KEY;
-  if (openaiKey) {
-    try {
-      const result = await callOpenAI(content, openaiKey);
-      if (result) return result;
-    } catch {}
-  }
-
   const ollamaModel = process.env.OLLAMA_MODEL;
-  if (ollamaModel) {
+
+  // Order providers based on which tool is running the session
+  const providers = tool === 'codex'
+    ? [
+        openaiKey && (() => callOpenAI(content, openaiKey)),
+        anthropicKey && (() => callAnthropic(content, anthropicKey)),
+        ollamaModel && (() => callOllama(content, ollamaModel)),
+      ]
+    : [
+        anthropicKey && (() => callAnthropic(content, anthropicKey)),
+        openaiKey && (() => callOpenAI(content, openaiKey)),
+        ollamaModel && (() => callOllama(content, ollamaModel)),
+      ];
+
+  for (const fn of providers.filter(Boolean)) {
     try {
-      const result = await callOllama(content, ollamaModel);
+      const result = await fn();
       if (result) return result;
     } catch {}
   }
