@@ -9,9 +9,9 @@ export async function readIntentMessage() {
   ]);
 
   const candidates = [
-    jsonResult && { message: jsonResult.message, source: 'json', mtime: jsonResult.mtime },
-    globalJsonResult && { message: globalJsonResult.message, source: 'global', mtime: globalJsonResult.mtime },
-    textResult && { message: textResult.message, source: 'text', mtime: textResult.mtime }
+    jsonResult && { message: jsonResult.message, tool: jsonResult.tool, source: 'json', mtime: jsonResult.mtime },
+    globalJsonResult && { message: globalJsonResult.message, tool: globalJsonResult.tool, source: 'global', mtime: globalJsonResult.mtime },
+    textResult && { message: textResult.message, tool: null, source: 'text', mtime: textResult.mtime }
   ].filter(Boolean);
 
   if (!candidates.length) return null;
