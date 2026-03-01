@@ -63,6 +63,37 @@ vibe restore "login"     # search by commit message
 
 After restoring, your AI assistant automatically gets context about what state you're at and what was attempted before.
 
+## Examples
+
+**Starting a new project session**
+```bash
+vibe init
+vibe watch --daemon
+# start prompting Claude or Codex — changes are auto-committed as you go
+```
+
+**Pin a working state before trying something risky**
+```bash
+vibe pin "Auth working, before refactor"
+# ask Claude to refactor...
+# something broke
+vibe log --pinned        # find your last good pin
+vibe restore "Auth working, before refactor"
+# back to where it worked, dev server restarted automatically
+```
+
+**See what happened in your session**
+```bash
+vibe log                 # last 10 commits
+vibe log --all           # full history with +/- stats
+vibe show abc1234        # full prompt and changes for a specific commit
+```
+
+**Undo the last change**
+```bash
+vibe restore ~1
+```
+
 ## Notes
 
 - `.vibe/` is local metadata — kept out of your repo via `.gitignore`
