@@ -80,6 +80,13 @@ function normalizeConfig(data) {
   return config;
 }
 
+export async function updateConfig(changes) {
+  const current = await readConfig();
+  const updated = { ...current, ...changes };
+  const content = yaml.dump(updated, { lineWidth: 120 });
+  await fs.writeFile(CONFIG_PATH, content, 'utf8');
+}
+
 export async function writeDefaultPins() {
   await ensureVibeDir();
   try {

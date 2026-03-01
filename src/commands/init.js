@@ -2,8 +2,9 @@ import fs from 'fs/promises';
 import path from 'path';
 import chalk from 'chalk';
 import { ensureGitRepo, stageAll, commit, hasUncommittedChanges, getUserIdentity } from '../lib/git.js';
-import { ensureVibeDir, writeDefaultConfig, writeDefaultPins, VIBE_DIR } from '../lib/config.js';
+import { ensureVibeDir, writeDefaultConfig, writeDefaultPins, updateConfig, VIBE_DIR } from '../lib/config.js';
 import { installClaudeHook, installCodexSkill } from './install-hooks.js';
+import { promptYesNo } from './shared/prompt.js';
 
 const VIBE_DENY_RULES = [
   'Edit(.vibe/**)',
@@ -56,6 +57,10 @@ export async function initCommand() {
       console.log('  git config user.email "you@example.com"');
       process.exit(1);
     }
+
+    console.log('');
+    const wantsSummary = await promptYesNo('Enable AI commit summaries? (uses ANTHROPIC_API_KEY, OPENAI_API_KEY, or OLLAMA_MODEL if set)');
+    await updateConfig({ intent_summary: wantsSummary });
 
     const hasChanges = await hasUncommittedChanges();
     if (hasChanges) {
