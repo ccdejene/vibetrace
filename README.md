@@ -8,6 +8,8 @@
 npm install -g vibetrace
 # or
 pnpm add -g vibetrace
+# or directly from GitHub
+npm install -g github:ccdejene/vibetrace
 ```
 
 The command is `vibe`.
@@ -22,10 +24,11 @@ The command is `vibe`.
 
 ```bash
 cd your-project
-vibe init       # sets up hooks, .gitignore rules, and protections
-vibe watch      # start auto-committing in the background
-vibe pin "Working login flow"
+vibe init                      # sets up hooks, .gitignore rules, and protections
+vibe pin "Working login flow"  # save a checkpoint whenever things are working
 ```
+
+If you're using Claude Code or Codex, commits happen automatically after each session. `vibe watch` is optional and adds file-change-based auto-commits on top.
 
 ## Commands
 
