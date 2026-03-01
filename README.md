@@ -1,6 +1,6 @@
 # vibetrace
 
-`vibetrace` is a lightweight CLI for AI-assisted coding sessions. It auto-commits work in the background, lets you pin known-good checkpoints, and can restore a project to an earlier state while generating recovery context for your AI assistant.
+`vibetrace` is a lightweight CLI for vibe coding sessions. It auto-commits work in the background, lets you pin known-good checkpoints, and can restore a project to an earlier state while generating recovery context for your AI assistant.
 
 A static landing page source is included in `index.html` for simple project marketing or GitHub Pages deployment.
 
