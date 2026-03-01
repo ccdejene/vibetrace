@@ -1,7 +1,7 @@
 {
   "name": "vibetrace",
   "version": "1.0.0",
-  "description": "A history tracker for your vibe coding sessions",
+  "description": "Stay in control of your vibe coding history",
   "license": "MIT",
   "repository": {
     "type": "git",
