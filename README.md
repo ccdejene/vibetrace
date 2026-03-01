@@ -120,20 +120,9 @@ npm install -g vibetrace
 
 After updating, re-run `vibe install-hooks` in any existing project to pick up hook and skill changes.
 
-## AI Commit Summaries
-
-During `vibe init` you'll be asked if you want AI commit summaries. When enabled, `vibe` generates a commit message from the diff when no prompt was captured. Set whichever key you already have:
-
-```bash
-export ANTHROPIC_API_KEY=sk-...   # Claude Haiku
-export OPENAI_API_KEY=sk-...      # GPT-4o mini
-export OLLAMA_MODEL=llama3.2      # local Ollama, no API key needed
-```
-
-You can toggle this anytime in `.vibe/config.yaml` by setting `intent_summary: true` or `false`.
-
 ## Notes
 
 - `.vibe/` is local metadata — kept out of your repo via `.gitignore`
 - `.claude/` is also gitignored — it's local config, not project state
 - `vibe` sits on top of git, it does not replace it
+- Optional: enable AI commit summaries during `vibe init` using `ANTHROPIC_API_KEY`, `OPENAI_API_KEY`, or `OLLAMA_MODEL`
