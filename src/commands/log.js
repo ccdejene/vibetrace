@@ -150,22 +150,19 @@ function printGrouped(rows) {
     }
 
     const hash = chalk.yellow(row.hash);
-    const bullet = row.isPin
-      ? chalk.yellowBright('*')
-      : row.isManual
-        ? chalk.blueBright('-')
-        : chalk.hex('#FF8C00')('-');
-    const msg = row.isPin
-      ? chalk.yellowBright(row.message)
-      : row.isManual
-        ? chalk.blueBright(row.message)
-        : chalk.hex('#FF8C00')(row.message);
+    const bullet = row.isPin ? chalk.yellowBright('*') : chalk.dim('-');
+    const msg = row.isPin ? chalk.yellowBright(row.message) : chalk.white(row.message);
     const time = chalk.dim(formatTime(row.date));
 
     const rawLabel = row.tool ? `[${row.tool}]` : row.isManual ? '[git]' : '';
     const LABEL_WIDTH = 9;
+    const labelColor = row.tool === 'claude'
+      ? chalk.hex('#FF8C00')
+      : row.tool === 'codex'
+        ? chalk.blueBright
+        : chalk.dim;
     const toolLabel = rawLabel
-      ? chalk.dim(rawLabel.padEnd(LABEL_WIDTH))
+      ? labelColor(rawLabel.padEnd(LABEL_WIDTH))
       : ' '.repeat(LABEL_WIDTH);
 
     const stat = row.stat;
