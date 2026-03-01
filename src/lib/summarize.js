@@ -56,6 +56,14 @@ async function callApi(content) {
     } catch {}
   }
 
+  const ollamaModel = process.env.OLLAMA_MODEL;
+  if (ollamaModel) {
+    try {
+      const result = await callOllama(content, ollamaModel);
+      if (result) return result;
+    } catch {}
+  }
+
   return null;
 }
 
@@ -99,6 +107,33 @@ async function callOpenAI(content, apiKey) {
       },
       body: JSON.stringify({
         model: 'gpt-4o-mini',
+        max_tokens: 80,
+        messages: [
+          { role: 'system', content: SYSTEM_PROMPT },
+          { role: 'user', content }
+        ]
+      }),
+      signal: controller.signal
+    });
+    if (!response.ok) return null;
+    const data = await response.json();
+    const text = data?.choices?.[0]?.message?.content?.trim();
+    return text ? (text.length > MAX_SUBJECT ? truncate(text) : text) : null;
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+async function callOllama(content, model) {
+  const host = process.env.OLLAMA_HOST ?? 'http://localhost:11434';
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), TIMEOUT_MS);
+  try {
+    const response = await fetch(`${host}/v1/chat/completions`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model,
         max_tokens: 80,
         messages: [
           { role: 'system', content: SYSTEM_PROMPT },

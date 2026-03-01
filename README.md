@@ -123,14 +123,16 @@ After updating, re-run `vibe install-hooks` in any existing project to pick up h
 
 ## AI Commit Summaries
 
-If no intent is captured (common with Codex), `vibe` can generate a commit message from the diff by calling an LLM API. Set whichever key you already have:
+If no intent is captured (common with Codex), `vibe` can generate a commit message from the diff by calling an LLM. Set whichever you already have:
 
 ```bash
 export ANTHROPIC_API_KEY=sk-...   # uses Claude Haiku
 export OPENAI_API_KEY=sk-...      # uses GPT-4o mini
+export OLLAMA_MODEL=llama3.2      # uses local Ollama (no API key needed)
+export OLLAMA_HOST=http://localhost:11434  # optional, this is the default
 ```
 
-Priority: Anthropic → OpenAI → falls back to a basic filename-based message. No key needed — it's optional.
+Priority: Anthropic → OpenAI → Ollama → falls back to a basic filename-based message. Entirely optional — works fine without any key.
 
 ## Notes
 
